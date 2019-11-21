@@ -14,6 +14,7 @@ import { PastTrainingComponent } from "./training/past-training/past-training.co
 import { WelcomeComponent } from "./welcome/welcome.component";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

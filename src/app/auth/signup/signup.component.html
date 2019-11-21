@@ -1,0 +1,46 @@
+<section class="signup-form">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    [formGroup]="signupForm"
+    (ngSubmit)="onSignUp()"
+  >
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Your email"
+        formControlName="email"
+        required
+      />
+      <mat-error *ngIf="email.hasError('email')">
+        This isn't a valid email.
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required')">
+        Field must not be empty.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      hintLabel="Should be at least {{ passMinLength }} characters long."
+    >
+      <input
+        type="password"
+        matInput
+        placeholder="Your password"
+        formControlName="password"
+        required
+      />
+      <mat-hint align="end">
+        {{ currentPassLength }} / {{ passMinLength }}
+      </mat-hint>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!signupForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</section>
