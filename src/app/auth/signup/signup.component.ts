@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 
+import * as moment from "moment";
+
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
@@ -8,21 +10,26 @@ import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 })
 export class SignupComponent implements OnInit {
   passMinLength = 5;
+  maxDate: moment.Moment;
 
   signupForm = this.fb.group({
     email: ["", [Validators.email, Validators.required]],
     password: [
       "",
       [Validators.minLength(this.passMinLength), Validators.required]
-    ]
+    ],
+    birthdate: ["", Validators.required],
+    agree: ["", Validators.requiredTrue]
   });
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.maxDate = moment().subtract(18, "years");
+  }
 
   onSignUp() {
-    console.log(this.signupForm.get("email"));
+    console.log(this.signupForm);
   }
 
   public get currentPassLength(): number {
