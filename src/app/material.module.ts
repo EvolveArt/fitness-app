@@ -5,7 +5,10 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule
 } from "@angular/material";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 @NgModule({
@@ -16,7 +19,10 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatInputModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -25,7 +31,10 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatInputModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule
   ]
 })
 export class MaterialModule {}
