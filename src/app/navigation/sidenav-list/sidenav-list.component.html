@@ -27,11 +27,7 @@
     <span class="nav-caption"> Training</span></a
   >
   <mat-list-item>
-    <button
-      mat-icon-button
-      (click)="closeSidenav()"
-      *ngIf="authStatus$ | async"
-    >
+    <button mat-icon-button (click)="onLogout()" *ngIf="authStatus$ | async">
       <mat-icon>eject</mat-icon>
       <span class="nav-caption">Logout</span>
     </button>

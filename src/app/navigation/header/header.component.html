@@ -23,7 +23,7 @@
         >
       </li>
       <li *ngIf="isAuth$ | async">
-        <a>Logout</a>
+        <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>
