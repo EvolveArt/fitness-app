@@ -7,22 +7,22 @@
   <div><a [routerLink]="['/']"></a>LOGO</div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="50px" class="navigation-items">
-      <li>
+      <li *ngIf="!(isAuth$ | async)">
         <a [routerLink]="['/signup']" routerLinkActive="router-link-active"
           >Signup</a
         >
       </li>
-      <li>
+      <li *ngIf="!(isAuth$ | async)">
         <a [routerLink]="['/login']" routerLinkActive="router-link-active"
           >Login</a
         >
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a [routerLink]="['/training']" routerLinkActive="router-link-active"
           >Training</a
         >
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a>Logout</a>
       </li>
     </ul>

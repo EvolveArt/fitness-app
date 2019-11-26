@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { MatSidenav } from "@angular/material";
+import { AuthService } from "src/app/auth/auth.service";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-header",
@@ -8,10 +10,13 @@ import { MatSidenav } from "@angular/material";
 })
 export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
+  isAuth$: Subject<boolean>;
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isAuth$ = this.auth.authChange;
+  }
 
   toggleSidenav() {
     this.sidenavToggle.emit();

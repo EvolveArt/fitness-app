@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormBuilder, AbstractControl } from "@angular/forms";
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-login",
@@ -12,12 +13,15 @@ export class LoginComponent implements OnInit {
     password: ["", Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   ngOnInit() {}
 
   onLogin() {
-    console.log(this.loginForm);
+    this.auth.login({
+      email: this.email.value,
+      password: this.password.value
+    });
   }
 
   public get email(): AbstractControl {

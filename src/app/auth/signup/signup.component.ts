@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 
 import * as moment from "moment";
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-signup",
@@ -22,14 +23,17 @@ export class SignupComponent implements OnInit {
     agree: ["", Validators.requiredTrue]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   ngOnInit() {
     this.maxDate = moment().subtract(18, "years");
   }
 
   onSignUp() {
-    console.log(this.signupForm);
+    this.auth.registerUser({
+      email: this.email.value,
+      password: this.password.value
+    });
   }
 
   public get currentPassLength(): number {
@@ -38,5 +42,9 @@ export class SignupComponent implements OnInit {
 
   public get email(): AbstractControl {
     return this.signupForm.get("email");
+  }
+
+  public get password(): AbstractControl {
+    return this.signupForm.get("password");
   }
 }
