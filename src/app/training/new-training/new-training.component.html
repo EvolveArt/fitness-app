@@ -2,8 +2,12 @@
   <mat-card fxFlex.xs="100%" fxFlex="400px">
     <mat-card-title fxLayoutAlign="center">New Training</mat-card-title>
     <mat-card-content fxLayoutAlign="center">
-      <mat-form-field [formControl]="selectedExercice">
-        <mat-select placeholder="Training Type">
+      <mat-form-field>
+        <mat-select
+          placeholder="Training Type"
+          [formControl]="selectedExercice"
+          required
+        >
           <mat-option *ngFor="let type of trainingTypes" [value]="type.id">
             {{ type.name }}
           </mat-option>
@@ -16,6 +20,7 @@
         mat-raised-button
         color="primary"
         (click)="onStartTraining()"
+        [disabled]="selectedExercice.status !== 'VALID'"
       >
         Start
       </button>

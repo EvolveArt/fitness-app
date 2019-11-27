@@ -13,9 +13,11 @@ export class TrainingService {
     { id: "touch-toes", name: "Touch Toes", duration: 120, calories: 15 }
   ];
 
-  private runningExercise: Exercice;
+  // tslint:disable-next-line: variable-name
+  private _runningExercise: Exercice;
 
   exerciceChanged = new Subject<Exercice>();
+  exercices: Exercice[] = [];
 
   constructor() {}
 
@@ -27,12 +29,37 @@ export class TrainingService {
     const selectedExercice = this.availableExercices.find(
       ex => ex.id === selectedId
     );
-    this.runningExercise = selectedExercice;
-    this.exerciceChanged.next({ ...this.runningExercise });
+    this._runningExercise = selectedExercice;
+    this.exerciceChanged.next({ ...this._runningExercise });
+  }
+
+  completeRunningExercice() {
+    this.exercices.push({
+      ...this.runningExercise,
+      date: new Date(),
+      state: "completed"
+    });
+    this.stopRunningExercice();
+  }
+
+  cancelRunningExercice(progress: number) {
+    const pctCompleted = progress / 100;
+    this.exercices.push({
+      ...this._runningExercise,
+      date: new Date(),
+      state: "cancelled",
+      calories: this._runningExercise.calories * pctCompleted,
+      duration: this._runningExercise.duration * pctCompleted
+    });
+    this.stopRunningExercice();
   }
 
   stopRunningExercice() {
-    this.runningExercise = null;
+    this._runningExercise = null;
     this.exerciceChanged.next(null);
+  }
+
+  public get runningExercise(): Exercice {
+    return { ...this._runningExercise };
   }
 }

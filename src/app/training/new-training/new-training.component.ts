@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Exercice } from "../exercice.model";
 import { TrainingService } from "../training.service";
-import { FormControl } from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-new-training",
@@ -9,10 +9,9 @@ import { FormControl } from "@angular/forms";
   styleUrls: ["./new-training.component.scss"]
 })
 export class NewTrainingComponent implements OnInit {
-  @Output() startTraining = new EventEmitter<void>();
   trainingTypes: Exercice[];
 
-  selectedExercice = new FormControl();
+  selectedExercice = new FormControl("", Validators.required);
 
   constructor(private trainingService: TrainingService) {}
 
