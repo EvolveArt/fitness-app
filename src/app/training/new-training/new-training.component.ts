@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Exercice } from "../exercice.model";
+import { Exercise } from "../exercise.model";
 import { TrainingService } from "../training.service";
 import { FormControl, Validators } from "@angular/forms";
 
@@ -9,17 +9,17 @@ import { FormControl, Validators } from "@angular/forms";
   styleUrls: ["./new-training.component.scss"]
 })
 export class NewTrainingComponent implements OnInit {
-  trainingTypes: Exercice[];
+  trainingTypes: Exercise[];
 
-  selectedExercice = new FormControl("", Validators.required);
+  selectedExercise = new FormControl("", Validators.required);
 
   constructor(private trainingService: TrainingService) {}
 
   ngOnInit() {
-    this.trainingTypes = this.trainingService.availableExercices;
+    this.trainingTypes = this.trainingService.availableExercises;
   }
 
   onStartTraining() {
-    this.trainingService.startExercice(this.selectedExercice.value);
+    this.trainingService.startExercise(this.selectedExercise.value);
   }
 }

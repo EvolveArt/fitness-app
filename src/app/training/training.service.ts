@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Exercice } from "./exercice.model";
+import { Exercise } from "./exercise.model";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -7,59 +7,59 @@ import { Subject } from "rxjs";
 })
 export class TrainingService {
   // tslint:disable-next-line: variable-name
-  private _availableExercices: Exercice[] = [
+  private _availableExercises: Exercise[] = [
     { id: "crunches", name: "Crunches", duration: 30, calories: 8 },
     { id: "burpees", name: "Burpees", duration: 60, calories: 8 },
     { id: "touch-toes", name: "Touch Toes", duration: 120, calories: 15 }
   ];
 
   // tslint:disable-next-line: variable-name
-  private _runningExercise: Exercice;
+  private _runningExercise: Exercise;
 
-  exerciceChanged = new Subject<Exercice>();
-  exercices: Exercice[] = [];
+  exerciseChanged = new Subject<Exercise>();
+  exercises: Exercise[] = [];
 
   constructor() {}
 
-  public get availableExercices(): Exercice[] {
-    return Array.from(this._availableExercices);
+  public get availableExercises(): Exercise[] {
+    return Array.from(this._availableExercises);
   }
 
-  startExercice(selectedId: string) {
-    const selectedExercice = this.availableExercices.find(
+  startExercise(selectedId: string) {
+    const selectedExercise = this.availableExercises.find(
       ex => ex.id === selectedId
     );
-    this._runningExercise = selectedExercice;
-    this.exerciceChanged.next({ ...this._runningExercise });
+    this._runningExercise = selectedExercise;
+    this.exerciseChanged.next({ ...this._runningExercise });
   }
 
-  completeRunningExercice() {
-    this.exercices.push({
+  completeRunningExercise() {
+    this.exercises.push({
       ...this.runningExercise,
       date: new Date(),
       state: "completed"
     });
-    this.stopRunningExercice();
+    this.stopRunningExercise();
   }
 
-  cancelRunningExercice(progress: number) {
+  cancelRunningExercise(progress: number) {
     const pctCompleted = progress / 100;
-    this.exercices.push({
+    this.exercises.push({
       ...this._runningExercise,
       date: new Date(),
       state: "cancelled",
       calories: this._runningExercise.calories * pctCompleted,
       duration: this._runningExercise.duration * pctCompleted
     });
-    this.stopRunningExercice();
+    this.stopRunningExercise();
   }
 
-  stopRunningExercice() {
+  stopRunningExercise() {
     this._runningExercise = null;
-    this.exerciceChanged.next(null);
+    this.exerciseChanged.next(null);
   }
 
-  public get runningExercise(): Exercice {
+  public get runningExercise(): Exercise {
     return { ...this._runningExercise };
   }
 }

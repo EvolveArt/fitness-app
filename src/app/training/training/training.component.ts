@@ -15,7 +15,7 @@ export class TrainingComponent implements OnInit {
   constructor(private trainingService: TrainingService) {}
 
   ngOnInit() {
-    this.ongoingTraining$ = this.trainingService.exerciceChanged.pipe(
+    this.ongoingTraining$ = this.trainingService.exerciseChanged.pipe(
       map(ex => (ex ? true : false))
     );
   }

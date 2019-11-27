@@ -25,7 +25,7 @@ export class CurrentTrainingComponent implements OnInit {
 
   /**
    * Start or resume the spinning timer.
-   * Computes the step with the running exercice's duration.
+   * Computes the step with the running exercise's duration.
    */
   resumeTimer() {
     const step = (this.trainingService.runningExercise.duration / 100) * 1000;
@@ -44,13 +44,13 @@ export class CurrentTrainingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       result
-        ? this.trainingService.cancelRunningExercice(this.progress)
+        ? this.trainingService.cancelRunningExercise(this.progress)
         : this.resumeTimer();
     });
   }
 
   trainingComplete() {
-    this.trainingService.completeRunningExercice();
+    this.trainingService.completeRunningExercise();
     clearInterval(this.progressTimer);
   }
 }

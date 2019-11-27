@@ -5,7 +5,7 @@
       <mat-form-field>
         <mat-select
           placeholder="Training Type"
-          [formControl]="selectedExercice"
+          [formControl]="selectedExercise"
           required
         >
           <mat-option *ngFor="let type of trainingTypes" [value]="type.id">
@@ -20,7 +20,7 @@
         mat-raised-button
         color="primary"
         (click)="onStartTraining()"
-        [disabled]="selectedExercice.status !== 'VALID'"
+        [disabled]="selectedExercise.status !== 'VALID'"
       >
         Start
       </button>
