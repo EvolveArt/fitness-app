@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { TrainingService } from "../training.service";
+
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-training",
@@ -6,9 +10,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./training.component.scss"]
 })
 export class TrainingComponent implements OnInit {
-  ongoingTraining = false;
+  ongoingTraining$: Observable<boolean>;
 
-  constructor() {}
+  constructor(private trainingService: TrainingService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ongoingTraining$ = this.trainingService.exerciceChanged.pipe(
+      map(ex => (ex ? true : false))
+    );
+  }
 }

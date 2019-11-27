@@ -2,10 +2,10 @@
   <mat-card fxFlex.xs="100%" fxFlex="400px">
     <mat-card-title fxLayoutAlign="center">New Training</mat-card-title>
     <mat-card-content fxLayoutAlign="center">
-      <mat-form-field>
+      <mat-form-field [formControl]="selectedExercice">
         <mat-select placeholder="Training Type">
-          <mat-option *ngFor="let type of trainingTypes" [value]="type.value">
-            {{ type.viewValue }}
+          <mat-option *ngFor="let type of trainingTypes" [value]="type.id">
+            {{ type.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
